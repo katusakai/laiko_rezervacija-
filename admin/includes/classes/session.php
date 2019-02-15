@@ -47,25 +47,35 @@ class Session {
 
   public function login($user){
     if($user) {
+      ###need to do foreach where User and Session classes properties are the same
       $this->id = $_SESSION['id'] = $user->id;
       $this->username = $_SESSION['username'] = $user->username;
       $this->firstName = $_SESSION['firstName'] = $user->firstName;
       $this->lastName = $_SESSION['lastName'] = $user->lastName;
       $this->pareigos = $_SESSION['pareigos'] = $user->pareigos;
+      ######foreach end
       $this->signed_in = true;
     }
   }
 
   public function logout(){
-    unset($_SESSION['id']);
-    unset($this->id);
+    session_unset();
+    foreach($this as $key => $value){
+      unset($this->$key);
+    }   
     $this->signed_in = false;
 
   }
 
   private function chech_the_login(){
     if(isset($_SESSION['id'])){
+      ###need to do foreach where User and Session classes properties are the same
       $this->id = $_SESSION['id'];
+      $this->username = $_SESSION['username'];
+      $this->firstName = $_SESSION['firstName'];
+      $this->lastName = $_SESSION['lastName'];
+      $this->pareigos = $_SESSION['pareigos'];
+      ######foreach end
       $this->signed_in = true;
     } else {
       unset($this->id);

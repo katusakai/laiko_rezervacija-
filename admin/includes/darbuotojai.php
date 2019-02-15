@@ -25,9 +25,11 @@ if(isset($_POST['create'])){
                     <th>Vartotojo vardas</th>
                     <th>Vardas</th>
                     <th>Pavardė</th>
-                    <th>Pareigos</th>
+                    <th>Pareigos</th>                    
+                    <?php if($session->ifAdmin()){  ?>
                     <th>Redaguoti</th>
                     <th>Ištrinti</th>
+                    <?php } ?>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,9 +42,11 @@ if(isset($_POST['create'])){
                 echo "<td>{$darbuotojas->firstName}</td>";
                 echo "<td>{$darbuotojas->lastName}</td>";
                 echo "<td>{$darbuotojas->pareigos}</td>";
+                if($session->ifAdmin()){
                 echo "<td><a href='?url=redaguoti_darbuotoja&id=" . $darbuotojas->id . "'>Redaguoti</a></td>";
                 echo "<td><a onClick=\"javascript: return confirm('Ar tikrai norite ištrinti?'); \" class='text-danger' href='includes/delete_user.php?id=" . $darbuotojas->id ."'>Ištrinti<a></td>";
-                echo "</tr>";                            
+                echo "</tr>";
+                }                            
             }
         ?>
                 </tbody>
@@ -50,6 +54,8 @@ if(isset($_POST['create'])){
         </div>    
     </div>
 
+
+    <?php if($session->ifAdmin()){  ?>  
     <div class="col-lg-6">
         <h2 class="page-header">
             Pridėti darbuotoją            
@@ -57,20 +63,20 @@ if(isset($_POST['create'])){
         <form action="" method="post" enctype="multipart/form-data">                                     
             <div class="col-md-6"> 
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input name="username" class="form-control" type="text" placeholder="Enter your username here"> 
+                    <label for="username">Prisijungimo vardas</label>
+                    <input name="username" class="form-control" type="text" placeholder="Įveskite prisijungimo vardą"> 
                 </div>
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input name="firstName" class="form-control" type="text" placeholder="Enter your First Name here"> 
+                    <label for="firstName">Vardas</label>
+                    <input name="firstName" class="form-control" type="text" placeholder="Įveskite vardą"> 
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input name="lastName" class="form-control" type="text" placeholder="Enter your Last Name here"> 
+                    <label for="lastName">Pavardė</label>
+                    <input name="lastName" class="form-control" type="text" placeholder="Įveskite Pavardę"> 
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input name="password" class="form-control" type="password" placeholder="Enter your Password here"> 
+                    <label for="password">Slaptažodis</label>
+                    <input name="password" class="form-control" type="password" placeholder="Įveskite prisijungimo slaptažodį"> 
                 </div>
                 <div class="form-group">
                 <label for="pareigos">Pareigos</label>
@@ -85,5 +91,6 @@ if(isset($_POST['create'])){
             </div>                                                 
         </form>
     </div>
+    <?php } ?>
 </div>
 <!-- /.row -->

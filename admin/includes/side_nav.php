@@ -9,5 +9,8 @@
         <li>
             <a href="?url=darbuotojai"><i class="fa fa-fw fa-users"></i> Darbuotojai</a>
         </li>
+        <li>
+            <a href="?url=redaguoti_darbuotoja&id=<?php echo $session->id ?>"><i class="fa fa-fw fa-users"></i> Profilis</a>
+        </li>
     </ul>
 </div>

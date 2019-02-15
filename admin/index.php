@@ -27,7 +27,13 @@
         include("includes/prideti_darbuotoja.php");
         break;
       case 'redaguoti_darbuotoja':
-        include("includes/redaguoti_darbuotoja.php");
+        if($_GET['id'] == $session->id){
+          include("includes/redaguoti_darbuotoja.php");          
+        } elseif($session->ifAdmin()){
+          include("includes/redaguoti_darbuotoja.php");
+        } else{
+          include("includes/darbuotojai.php");
+      }
         break;
       
       default:

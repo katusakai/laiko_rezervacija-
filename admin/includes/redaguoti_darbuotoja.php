@@ -1,8 +1,10 @@
-<?php
-if(!$session->ifAdmin()){
-    echo "kas cia dabar<br>";
-    echo $session->pareigos;
-}
+<?php 
+    function ifSelected($option){
+        global $user;
+        if($user->pareigos == $option ){
+        echo "selected";
+        }
+    }
 ?>
 <?php 
 $user = User::find_by_id($_GET['id']);
@@ -14,7 +16,9 @@ if(isset($_POST['redaguoti'])){
         if(!empty($_POST['password'])){
             $user->password = $_POST['password'];
         }        
-        $user->pareigos = $_POST['pareigos'];
+        if(!empty($_POST['pareigos'])){
+            $user->pareigos = $_POST['pareigos'];
+        }
     }
     $user->update();
 }
@@ -24,7 +28,7 @@ if(isset($_POST['redaguoti'])){
 <div class="row">
       <div class="col-lg-6">
         <h2 class="page-header">
-            Pridėti darbuotoją            
+            Redaguoti profilį            
         </h2>
         <form action="" method="post" enctype="multipart/form-data">                                     
             <div class="col-md-6"> 
@@ -44,13 +48,15 @@ if(isset($_POST['redaguoti'])){
                     <label for="password">Password</label>
                     <input name="password" class="form-control" type="password" placeholder="Įveskite naują slaptažodį, jei norite jį pakeisti"> 
                 </div>
+                <?php if($session->ifAdmin()){ ?>
                 <div class="form-group">
-                <label for="pareigos">Pareigos</label>
-                <select class="form-control" name="pareigos" id="">
-                <option value="kirpeja">Kirpėja</option>
-                <option value="admin">Admin</option>
-                </select>
+                    <label for="pareigos">Pareigos</label>
+                    <select class="form-control" name="pareigos" id="">
+                        <option <?php $user->ifSelected('kirpeja') ?> value="kirpeja">Kirpėja</option>
+                        <option <?php $user->ifSelected('admin') ?> value="admin">Admin</option>
+                    </select>
                 </div>
+                <?php  } ?>
                 <div class="form-group">
                     <input name="redaguoti" class="btn btn-primary pull-right" type="submit" value="Redaguoti"> 
                 </div>            

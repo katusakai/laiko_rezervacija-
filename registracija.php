@@ -7,6 +7,11 @@ function diena(){
 	}
 }
 ?>
+<!-- <pre>
+<?php var_dump($session) ?>
+<?php var_dump($_SESSION) ?>
+</pre> -->
+
 <form method="GET">
     <div class="form-group">
         <label for="data">Pasirinkite dieną</label>

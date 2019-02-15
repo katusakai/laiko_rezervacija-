@@ -2,14 +2,13 @@
 class User extends Db_object{
 
   protected static $db_table = "users";
-  protected static $db_table_fields = array('username', 'password', 'firstName', 'lastName', 'pareigos', 'statusas');
+  protected static $db_table_fields = array('username', 'password', 'firstName', 'lastName', 'pareigos');
   public $id;
   public $username;
   public $password;
   public $firstName;
   public $lastName;
   public $pareigos; //admin arba kirpeja
-  public $statusas; //atostogauja, serga
 
 
   public static function verify_user($username, $password){
@@ -30,5 +29,11 @@ class User extends Db_object{
     $result = static::find_by_query("SELECT * FROM " . static::$db_table . " WHERE 	pareigos = '{$pareigos}'");
     return count($result);
   }
+
+  public function ifSelected($option){    
+    if($this->pareigos == $option ){
+    echo "selected";
+    }
+}
 }
 ?>
