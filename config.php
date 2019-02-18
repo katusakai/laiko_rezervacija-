@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('Europe/Vilnius');
 //Database Connection Constants
 define('DB_HOST','localhost');
 define('DB_USER','root');

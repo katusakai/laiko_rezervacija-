@@ -1,11 +1,4 @@
-<?php 
-    function ifSelected($option){
-        global $user;
-        if($user->pareigos == $option ){
-        echo "selected";
-        }
-    }
-?>
+
 <?php 
 $user = User::find_by_id($_GET['id']);
 if(isset($_POST['redaguoti'])){    

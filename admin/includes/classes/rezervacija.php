@@ -9,7 +9,27 @@ class Rezervacija extends Db_object{
     public $phone;
     public $rezervacijos_diena;
     public $rezervacijos_laikas;
-    public $iraso_data;    
+    public $iraso_data; 
+
+    private static $darbo_pradzia_val = 9;   //valandos
+    private static $darbo_pradzia_min = 0;		//minute
+    private static $darbo_pabaiga_val = 20;   //valandos
+    private static $darbo_pabaiga_min = 0;		//minutes
+    
+    private static function darboPradzia(){
+        return new DateTime(date("H:i", mktime(self::$darbo_pradzia_val, self::$darbo_pradzia_min)));
+    }
+
+    private static function darboPabaiga(){
+        return new DateTime(date("H:i", mktime(self::$darbo_pabaiga_val, self::$darbo_pabaiga_min)));
+    }
+
+    public static function darboPabaigosLaikas($date){ 
+            $darbo_laikas = self::darboPabaiga();
+            $laikas = $darbo_laikas->format('H:i');
+            return strtotime("$date $laikas");
+        ;
+    }
     
     public static function rezervacijosPagalDiena($data){
         return static::find_by_query("SELECT * FROM " . static::$db_table . " WHERE rezervacijos_diena = '{$data}'");
@@ -21,17 +41,10 @@ class Rezervacija extends Db_object{
     }
 
     private static function galimiLaikai(){              //galimi darbo laikai pagal įvestas darbo valandas
-        $darbo_pradzia_val = 9;   //valandos
-        $darbo_pradzia_min = 0;		//minutes
-        $darbo_laikas = new DateTime(date("H:i", mktime($darbo_pradzia_val, $darbo_pradzia_min)));
-    
-        $darbo_pabaiga_val = 20;   //valandos
-        $darbo_pabaiga_min = 0;		//minutes
-        $darbo_pabaiga = new DateTime(date("H:i", mktime($darbo_pabaiga_val, $darbo_pabaiga_min)));
-    
+        $darbo_laikas = self::darboPradzia();            
         $galimi_laikai = array();
     
-        while($darbo_laikas != $darbo_pabaiga){
+        while($darbo_laikas != self::darboPabaiga()){
             global $diena;
             $laikas = $darbo_laikas->format('H:i');
             if(static::arLaisvasLaikas($laikas, $diena) < User::darbuotojuKiekis('kirpeja')){
@@ -48,8 +61,9 @@ class Rezervacija extends Db_object{
         $rezervacijos = static::rezervacijosPagalDiena($data);
         $galimu_laiku_kiekis = array();
         foreach(static::galimiLaikai() as $laikas){
+            $tikslus_laikas =  strtotime("$data $laikas");      //tikslus laikas palyginimui, kad nerodytų jau praėjusių laikų
             $laisvas_kiekis = User::darbuotojuKiekis('kirpeja') - static::arLaisvasLaikas($laikas,$data);
-            if($laisvas_kiekis > 0 ){
+            if($laisvas_kiekis > 0 && $tikslus_laikas > time()){
                 $galimu_laiku_kiekis_papild = array('laikas' => $laikas, 'laisvos_vietos' => $laisvas_kiekis);                
                 array_push($galimu_laiku_kiekis, $galimu_laiku_kiekis_papild ); 
             }
