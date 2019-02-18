@@ -70,5 +70,30 @@ class Rezervacija extends Db_object{
         }
         return $galimu_laiku_kiekis;          //returns array su galimu laiku ir laisvų vietų skaičiumi, jeigu vietų yra
     }
+
+    public static function find_by_search($search){
+        $sql = "SELECT * FROM " . static::$db_table . " 
+                WHERE vardas LIKE '%$search%' 
+                OR pavarde LIKE '%$search%'
+                OR email LIKE '%$search%'
+                OR phone LIKE '%$search%'";
+        return static::find_by_query($sql);
+    }
+
+    public static function find_by_search_limit($search, $page_number, $limit){
+        $sql = "SELECT * FROM " . static::$db_table . " 
+                WHERE vardas LIKE '%$search%' 
+                OR pavarde LIKE '%$search%'
+                OR email LIKE '%$search%'
+                OR phone LIKE '%$search%'
+                LIMIT {$page_number}, {$limit}";
+        return static::find_by_query($sql);
+    }
+
+    public static function find_all_limit($page_number, $limit){
+          $sql = "SELECT * FROM " . static::$db_table . "
+                  LIMIT {$page_number}, {$limit}";
+        return static::find_by_query($sql);
+    }
 }
 ?>

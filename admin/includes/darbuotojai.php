@@ -43,9 +43,9 @@ if(isset($_POST['create'])){
                 echo "<td>{$darbuotojas->lastName}</td>";
                 echo "<td>{$darbuotojas->pareigos}</td>";
                 if($session->ifAdmin()){
-                echo "<td><a href='?url=redaguoti_darbuotoja&id=" . $darbuotojas->id . "'>Redaguoti</a></td>";
-                echo "<td><a onClick=\"javascript: return confirm('Ar tikrai norite ištrinti?'); \" class='text-danger' href='includes/delete_user.php?id=" . $darbuotojas->id ."'>Ištrinti<a></td>";
-                echo "</tr>";
+                    echo "<td><a href='?url=redaguoti_darbuotoja&id=" . $darbuotojas->id . "'>Redaguoti</a></td>";
+                    echo "<td><a onClick=\"javascript: return confirm('Ar tikrai norite ištrinti?'); \" class='text-danger' href='includes/delete_user.php?id=" . $darbuotojas->id ."'>Ištrinti<a></td>";
+                    echo "</tr>";
                 }                            
             }
         ?>

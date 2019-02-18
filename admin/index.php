@@ -18,7 +18,7 @@
   if(isset($_GET['url'])){
     switch ($_GET['url']) {
       case 'rezervacija':
-        include("includes/admin_content.php");
+        include("includes/rezervacijos.php");
         break;
       case 'darbuotojai':
         include("includes/darbuotojai.php");
@@ -37,12 +37,12 @@
         break;
       
       default:
-      include("includes/admin_content.php") ;
+      include("includes/rezervacijos.php") ;
         break;
     }
 
   } else {
-    include("includes/admin_content.php") ;
+    include("includes/rezervacijos.php") ;
   }
     ?>
   </div>

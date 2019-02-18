@@ -13,31 +13,36 @@ function diena(){
 
 <?php
 if(isset($_COOKIE['Rezervuotojo_diena'])){
-$Rezervuotojo_diena = $_COOKIE['Rezervuotojo_diena'];
-$Rezervuotojo_laikas = $_COOKIE['Rezervuotojo_laikas'];
-$Rezervuotojo_tikslus_laikas =  strtotime("$Rezervuotojo_diena $Rezervuotojo_laikas");
-
-    if($Rezervuotojo_tikslus_laikas>time()){             //jeigu rezervacijos laikas ir data dar neatėjo
-        ?>   
-        <div class="alert alert-info">
-        <?php 
-            echo "Jūs esate sėkmingai užsiregistravęs ";
-            echo $_COOKIE['Rezervuotojo_diena'];
-            echo " dieną, ";
-            echo $_COOKIE['Rezervuotojo_laikas'];
-            echo " valandą, vardu ir pavarde ";
-            echo $_COOKIE['Rezervuotojo_vardas'] . " " . $_COOKIE['Rezervuotojo_pavarde'] . ".<br>";
-            echo "Jeigu norite atšaukti registraciją, spauskite ";
-            
-            echo "<b><a onClick=\"javascript: return confirm('Ar tikrai norite atšaukti rezervacija?'); \" class='text-danger' ";
-            echo "href='includes/delete_rezervacija.php?id=";
-            echo $_COOKIE['Rezervuotojo_id'];
-            echo "'>čia</a></b>";
-        ?>
-        </div>
-        <?php
-    } else{                                  //jeigu laikas jau praėjo, reikia atnaujinti cookies
-        $cookie->panaikintiRezervacija();
+    $Rezervuotojo_diena = $_COOKIE['Rezervuotojo_diena'];
+    $Rezervuotojo_laikas = $_COOKIE['Rezervuotojo_laikas'];
+    $Rezervuotojo_tikslus_laikas =  strtotime("$Rezervuotojo_diena $Rezervuotojo_laikas");
+    $tiksli_rezervacija = Rezervacija::find_by_id($_COOKIE['Rezervuotojo_id']);
+    if($tiksli_rezervacija){
+        if($Rezervuotojo_tikslus_laikas>time() && $tiksli_rezervacija->id == $_COOKIE['Rezervuotojo_id']){             //jeigu rezervacijos laikas ir data dar neatėjo, taip pat jeigu rezervacija buvo ištrinta administratoriaus
+            ?>   
+            <div class="alert alert-info">
+            <?php 
+                echo "Jūs esate sėkmingai užsiregistravęs ";
+                echo $_COOKIE['Rezervuotojo_diena'];
+                echo " dieną, ";
+                echo $_COOKIE['Rezervuotojo_laikas'];
+                echo " valandą, vardu ir pavarde ";
+                echo $_COOKIE['Rezervuotojo_vardas'] . " " . $_COOKIE['Rezervuotojo_pavarde'] . ".<br>";
+                echo "Jeigu norite atšaukti registraciją, spauskite ";
+                
+                echo "<b><a onClick=\"javascript: return confirm('Ar tikrai norite atšaukti rezervacija?'); \" class='text-danger' ";
+                echo "href='includes/delete_rezervacija.php?id=";
+                echo $_COOKIE['Rezervuotojo_id'];
+                echo "'>čia</a></b>";
+            ?>
+            </div>
+            <?php
+        } else{                                  //jeigu laikas jau praėjo, reikia atnaujinti cookies
+            $cookie->panaikintiRezervacija();
+        }
+    } else {
+        echo "<div class='alert alert-warning'>Panašu kad jūsų rezervacija buvo atšaukta. Prašome rezervuotis iš naujo</div>";
+        $cookie->panaikintiRezervacija();    //jeigu duomenų bazėje nebėra įrašo, reikia atnaujinti cookies
     }
 }
 ?>
