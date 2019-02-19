@@ -115,20 +115,20 @@ function diena(){
                             </select>
                         </div>
                         <div class='form-group'> 
-                            <label for="vardas">Jūsų vardas</label>
-                            <input class="form-control" type="text" name="vardas" placeholder="Iveskite savo vardą" <?php postValue('vardas') ?> >
+                            <label for="vardas">Vardas</label>
+                            <input class="form-control" type="text" name="vardas" placeholder="Iveskite vardą" <?php postValue('vardas') ?> >
                         </div>
                         <div class='form-group'> 
-                            <label for="pavarde">Jūsų pavardė</label>
-                            <input class="form-control" type="text" name="pavarde" placeholder="Iveskite savo pavardę" <?php postValue('pavarde') ?> >
+                            <label for="pavarde">Pavardė</label>
+                            <input class="form-control" type="text" name="pavarde" placeholder="Iveskite pavardę" <?php postValue('pavarde') ?> >
                         </div>
                         <div class='form-group'> 
                             <label for="email">El. pašto adresas</label>
-                            <input class="form-control" type="text" name="email" placeholder="Iveskite savo el. pašto adresą" <?php postValue('email') ?> >
+                            <input class="form-control" type="text" name="email" placeholder="Iveskite el. pašto adresą" <?php postValue('email') ?> >
                         </div>
                         <div class='form-group'> 
                             <label for="email">Mob. tel. nr.</label>
-                            <input class="form-control" type="text" name="phone" placeholder="Iveskite savo mob. tel. numerį" <?php postValue('phone') ?> >
+                            <input class="form-control" type="text" name="phone" placeholder="Iveskite mob. tel. numerį" <?php postValue('phone') ?> >
                         </div>
                         <div class='form-group'> 
                             <input class='btn btn-primary' type='submit' name='submit_rezervuoti' value='Rezervuoti laiką'/>

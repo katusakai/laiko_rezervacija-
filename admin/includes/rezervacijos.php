@@ -34,18 +34,18 @@
                 <tr>
 
 
-                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=vardas&order=<?php echo $asc_or_desc; ?>">Vardas</a></th>
-                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=pavarde&order=<?php echo $asc_or_desc; ?>">Pavardė</a></th>
-                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=email&order=<?php echo $asc_or_desc; ?>">Email</a></th>
-                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=phone&order=<?php echo $asc_or_desc; ?>">Tel. nr.</a></th>
-                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_diena&order=<?php echo $asc_or_desc; ?>">Diena</a></th>
-                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_laikas&order=<?php echo $asc_or_desc; ?>">Laikas</a></th>
-                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=apsilankymas&order=<?php echo $asc_or_desc; ?>">Apsilankymo Nr.</a></th>
-                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=apsilankymas&order=<?php echo $asc_or_desc; ?>">Rezervavęs asmuo</a></th>
+                    <th><a class="customLink" href="<?php echo addOrUpdateUrlParam() ?>&column=vardas&order=<?php echo $asc_or_desc; ?>">Vardas</a></th>
+                    <th><a class="customLink" href="<?php echo addOrUpdateUrlParam() ?>&column=pavarde&order=<?php echo $asc_or_desc; ?>">Pavardė</a></th>
+                    <th><a class="customLink" href="<?php echo addOrUpdateUrlParam() ?>&column=email&order=<?php echo $asc_or_desc; ?>">El. Paštas</a></th>
+                    <th><a class="customLink" href="<?php echo addOrUpdateUrlParam() ?>&column=phone&order=<?php echo $asc_or_desc; ?>">Tel. nr.</a></th>
+                    <th><a class="customLink" href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_diena&order=<?php echo $asc_or_desc; ?>">Diena</a></th>
+                    <th><a class="customLink" href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_laikas&order=<?php echo $asc_or_desc; ?>">Laikas</a></th>
+                    <th><a class="customLink" href="<?php echo addOrUpdateUrlParam() ?>&column=apsilankymas&order=<?php echo $asc_or_desc; ?>">Apsilankymo Nr.</a></th>
+                    <th><a class="customLink" href="<?php echo addOrUpdateUrlParam() ?>&column=kurejo_id&order=<?php echo $asc_or_desc; ?>">Rezervavęs asmuo</a></th>
                     
-                    <?php if($session->ifAdmin()){ ?>
+                    <?php //if($session->ifAdmin()){ ?>
                     <th>Ištrinti</th>
-                    <?php }?>
+                    <?php //}?>
                 </tr>
                 </thead>
                 <tbody>
@@ -76,10 +76,12 @@
                 echo "<td>{$irasas->rezervacijos_laikas}</td>";
                 echo "<td>{$irasas->apsilankymas} " . Rezervacija::arDuotiNuolaidą($irasas->apsilankymas) . "</td>";
                 echo "<td>$rezervavo</td>";
-                if($session->ifAdmin()){
-                    echo "<td><a onClick=\"javascript: return confirm('Ar tikrai norite ištrinti?'); \" class='text-danger' href='includes/delete_rezervacija.php?id=" . $irasas->id ."'>Ištrinti<a></td>";
+                echo "<td>";
+                if($session->ifAdmin() || $_SESSION['id'] == $irasas->kurejo_id){
+                    echo "<a onClick=\"javascript: return confirm('Ar tikrai norite ištrinti?'); \" class='text-danger' href='includes/delete_rezervacija.php?id=" . $irasas->id ."'>Ištrinti<a>";
                 }
-                echo "</tr>";                            
+                echo "</td>";    
+                echo "</tr>";                        
             }
              
         ?>

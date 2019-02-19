@@ -43,8 +43,13 @@ class User extends Db_object{
       $sql = "SELECT * FROM " . static::$db_table . " 
               WHERE id = $id 
               LIMIT 1";
-      $rezervuotojas = static::find_by_query($sql);        
-      return $rezervuotojas[0]->firstName . " " . $rezervuotojas[0]->lastName;
+      $rezervuotojas = static::find_by_query($sql);
+      if(!$rezervuotojas)  {
+        return "Nebedirbanti darbuotoja";
+      } else{
+        return $rezervuotojas[0]->firstName . " " . $rezervuotojas[0]->lastName;
+      }      
+      
     }
   }
 }

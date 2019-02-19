@@ -3,6 +3,9 @@
         <li>
             <a href="index.php?siandien=&data=<?php echo date('Y-m-d') ?>&search_submit="><i class="fa fa-fw fa-dashboard"></i> Šiandienos rezervacijos</a>
         </li>
+        <li>
+            <a href="index.php?siandien=&data=<?php echo date('Y-m-d',time()+60*60*24) ?>&search_submit="><i class="fa fa-fw fa-step-forward"></i> Rytojaus rezervacijos</a>
+        </li>
 		 <li>
             <a href="index.php?url=rezervacija"><i class="fa fa-fw fa-list"></i> Rezervacijų sąrašas</a>
         </li>

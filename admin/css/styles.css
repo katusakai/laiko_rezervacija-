@@ -62,4 +62,9 @@
    .pager li.active_link {
      background: #000 !important;
    }
+
+   .customLink, .customLink:hover{
+    color: black;
+    text-decoration: none;
+  }
    

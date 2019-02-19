@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
     $session->login($user_found);
     redirect("index.php");
   } else {
-    $the_message = "Your password or username are incorrect";
+    $the_message = "Jūsų vartotojo vardas arba slaptažodis yra neteisingi";
   }
 } else {
   $username = "";
@@ -35,20 +35,21 @@ if(isset($_POST['submit'])){
 <form id="login-id" action="" method="post">
 
 <div class="form-group">
-	<label style="color:white" for="username">Username</label>
+	<label style="color:white" for="username">Vartotojo vardas</label>
 	<input type="text" class="form-control" name="username" value="<?php echo htmlentities($username); ?>" >
 
 </div>
 
 <div class="form-group">
-	<label style="color:white" for="password">Password</label>
+	<label style="color:white" for="password">Slaptažodis</label>
 	<input type="password" class="form-control" name="password" value="<?php echo htmlentities($password); ?>">
 
 </div>
 
 
 <div class="form-group">
-<input type="submit" name="submit" value="Submit" class="btn btn-primary">
+<input type="submit" name="submit" value="Prisijungti" class="btn btn-primary">
+<a href="../"><button type="button" class="btn btn-secondary pull-right">Grįžti į pagrindinį</button></a>
 
 </div>
 

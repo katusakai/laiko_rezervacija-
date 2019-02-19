@@ -16,6 +16,9 @@
                     <li>
                         <a href="admin">Kirpėjoms</a>
                     </li>
+                    <li>
+                        <a href="vadovas.php">Kaip naudotis</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
