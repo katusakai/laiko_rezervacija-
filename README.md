@@ -7,4 +7,12 @@ NFQ užduotis Laiko_rezervacija
 2. Susikuriate duomenų bazę ir importuojate /sql/nfq_laiko_rezervacija.sql.zip
 3. Sukonfiguruojate config.php pagal savo duomenų bazės duomenis.
 4. Pakoreguojate admin/includes/init.php 4tą eilutę pagal savo direktoriją.
-5. Turi veikti
+5. Perskaičius instrukciją kaip naudotis pašalinti failą vadovas.php
+6. Kartu su failu pašalinti 19-21 eilutes iš includes/navigation.php
+7. Turi veikti
+
+Nuoroda į live versiją:
+http://katusakai.lt/laiko_rezervacija/
+
+
+
