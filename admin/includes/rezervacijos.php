@@ -1,3 +1,7 @@
+<?php 
+
+?>
+
 <div class="row">
     <div class="col-lg-12">
         <h2 class="page-header">
@@ -12,6 +16,9 @@
                 <div class="input-group">                    
                     <input name="search" type="text" class="form-control" <?php postValue('search')?>>
                     <span class="input-group-btn">
+                        <input class="form-control" type="date" name="data"<?php postValue('data')?>>
+                    </span>
+                    <span class="input-group-btn">
                         <button name="search_submit" class="btn btn-default" type="submit">
                             <span class="glyphicon glyphicon-search"></span>
                     </button>
@@ -19,18 +26,19 @@
                 </div>
             </form>        
         </div>
-
     
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>Vardas</th>
-                    <th>Pavarde</th>
-                    <th>Email</th>
-                    <th>Tel. nr.</th>
-                    <th>Diena</th>
-                    <th>Laikas</th>
+
+
+                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=vardas&order=<?php echo $asc_or_desc; ?>">Vardas</a></th>
+                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=pavarde&order=<?php echo $asc_or_desc; ?>">Pavardė</a></th>
+                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=email&order=<?php echo $asc_or_desc; ?>">Email</a></th>
+                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=phone&order=<?php echo $asc_or_desc; ?>">Tel. nr.</a></th>
+                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_diena&order=<?php echo $asc_or_desc; ?>">Diena</a></th>
+                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_laikas&order=<?php echo $asc_or_desc; ?>">Laikas</a></th>
                     <?php if($session->ifAdmin()){ ?>
                     <th>Ištrinti</th>
                     <?php }?>
@@ -38,24 +46,21 @@
                 </thead>
                 <tbody>
         
-        <?php 
-        $limit = 20; //reik mainstreamint
-            if(isset($_GET['search_submit'])){
+            <?php 
+            $limit = 20; //reik mainstreamint
+            if(isset($_GET['search_submit']) && isset($_GET['data'])){
+                $search = $_GET['data'];
+            }elseif(isset($_GET['search_submit'])){
                 $search = $_GET['search'];
-                $rezervacijos = Rezervacija::find_by_search($search);
-                $page_number = pageNr($rezervacijos, $limit);
-                $query_count = queryCount($rezervacijos, $limit);
-                $rezervacijos = Rezervacija::find_by_search_limit($search, $page_number, $limit);
-                
-            } else {
-                $rezervacijos = Rezervacija::find_all();
-                $page_number = pageNr($rezervacijos, $limit);
-                $query_count = queryCount($rezervacijos, $limit);
-                $rezervacijos = Rezervacija::find_all_limit($page_number, $limit);
+            }else{
+                $search = "";
             }
-
-
             
+            $rezervacijos = Rezervacija::findBySearch($search);
+            $page_number = pageNr($rezervacijos, $limit);
+            $query_count = queryCount($rezervacijos, $limit);
+            $rezervacijos = Rezervacija::findBySearchLimited($search, $page_number, $limit, $column, $sort_order);
+             
             foreach ($rezervacijos as $irasas) {
                 echo "<tr>";
                 echo "<td>{$irasas->vardas}</td>";
@@ -91,12 +96,12 @@
                 for($i = 1 ; $i <= $query_count ; $i++){
                     echo "<li class='";
                     ifActive();
-                    echo "'><a href='?";
-                    ifSearch();
-                    echo "page=$i'>$i</a></li>";
+                    echo "'><a href='";
+                    echo addOrUpdateUrlParam();
+                    echo "&page=$i'>$i</a></li>";
                 }
             } 
-        
+            
         ?>
         </ul>
         <!-- Pagination end -->  

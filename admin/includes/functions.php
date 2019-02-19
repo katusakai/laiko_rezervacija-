@@ -63,12 +63,13 @@ function pageNr($array, $limit){                      //for pagination
 return $page_1;  
 }
 
-function ifSearch(){                          //for pagination
-  global $search;
-  if(isset($_GET['search_submit'])){
-    echo "search=$search&search_submit=&";
-  }
-}
+// function ifSearch(){                          //for pagination
+//   global $search;
+//   if(isset($_GET['search_submit'])){
+//     echo "search=$search&search_submit=&";
+//   }
+// }
+
 
 function ifActive(){                        //for pagination
   global $i;
@@ -83,4 +84,20 @@ function ifActive(){                        //for pagination
     echo "active";
   }
 }
+
+function addOrUpdateUrlParam(){                                //returns current URL. Usefull when stacking GET links
+    $params = $_GET;    
+    return basename($_SERVER['PHP_SELF']).'?'.http_build_query($params);
+}
+
+
+  #############   Variables required for sorting################
+$columns = array('rezervacijos_diena','pavarde','email','phone','vardas','rezervacijos_laikas');
+$column = isset($_GET['column']) && in_array($_GET['column'], $columns) ? $_GET['column'] : $columns[0];
+$sort_order = isset($_GET['order']) && strtolower($_GET['order']) == 'asc' ? 'ASC' : 'DESC';
+$up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sort_order); 
+$asc_or_desc = $sort_order == 'ASC' ? 'desc' : 'asc';
+// $add_class = ' class="highlight"';
+
+########################################################################
  ?>

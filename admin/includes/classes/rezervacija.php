@@ -71,7 +71,7 @@ class Rezervacija extends Db_object{
         return $galimu_laiku_kiekis;          //returns array su galimu laiku ir laisvų vietų skaičiumi, jeigu vietų yra
     }
 
-    public static function find_by_search($search){
+    public static function findBySearch($search){
         $sql = "SELECT * FROM " . static::$db_table . " 
                 WHERE vardas LIKE '%$search%' 
                 OR pavarde LIKE '%$search%'
@@ -80,19 +80,17 @@ class Rezervacija extends Db_object{
         return static::find_by_query($sql);
     }
 
-    public static function find_by_search_limit($search, $page_number, $limit){
+    public static function findBySearchLimited($search, $page_number, $limit, $column, $sort_order){
         $sql = "SELECT * FROM " . static::$db_table . " 
                 WHERE vardas LIKE '%$search%' 
                 OR pavarde LIKE '%$search%'
                 OR email LIKE '%$search%'
                 OR phone LIKE '%$search%'
+                OR rezervacijos_diena = '$search'
+                ORDER BY {$column} {$sort_order},
+                rezervacijos_diena DESC,
+                rezervacijos_LAIKAS ASC
                 LIMIT {$page_number}, {$limit}";
-        return static::find_by_query($sql);
-    }
-
-    public static function find_all_limit($page_number, $limit){
-          $sql = "SELECT * FROM " . static::$db_table . "
-                  LIMIT {$page_number}, {$limit}";
         return static::find_by_query($sql);
     }
 }
