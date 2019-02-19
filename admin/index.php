@@ -26,6 +26,9 @@
       case 'prideti_darbuotoja':
         include("includes/prideti_darbuotoja.php");
         break;
+      case 'create_rezervacija':
+      include("includes/create_rezervacija.php");
+      break;
       case 'redaguoti_darbuotoja':
         if($_GET['id'] == $session->id){
           include("includes/redaguoti_darbuotoja.php");          

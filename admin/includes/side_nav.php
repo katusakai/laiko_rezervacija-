@@ -1,16 +1,16 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
-        <li>
+        <!-- <li>
             <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Pagrindinis</a>
-        </li>
-		        <li>
-            <a href="?url=rezervacija"><i class="fa fa-fw fa-photo"></i> Rezervacijos</a>
-        </li>
-        <li>
-            <a href="?url=darbuotojai"><i class="fa fa-fw fa-users"></i> Darbuotojai</a>
+        </li> -->
+		 <li>
+            <a href="index.php?url=rezervacija"><i class="fa fa-fw fa-list"></i> Rezervacijų sąrašas</a>
         </li>
         <li>
-            <a href="?url=redaguoti_darbuotoja&id=<?php echo $session->id ?>"><i class="fa fa-fw fa-users"></i> Profilis</a>
+            <a href="create_rezervacija.php"><i class="fa fa-fw fa-plus"></i> Rezervuoti nauja</a>
+        </li>
+        <li>
+            <a href="index.php?url=darbuotojai"><i class="fa fa-fw fa-users"></i> Darbuotojai</a>
         </li>
     </ul>
 </div>

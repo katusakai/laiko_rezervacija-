@@ -47,15 +47,6 @@ if(isset($_COOKIE['Rezervuotojo_diena'])){
 }
 ?>
 
-<!-- <?php if(isset($zinute)){
-    echo "<div class='alert alert-warning'>";
-    echo $zinute;
-    echo "</div>";
-} else {
-    echo "ka yra";
-}
-?> -->
-
 
 <form method="GET">
     <div class="form-group">
