@@ -5,7 +5,7 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
-                 <?php include("registracija.php") ?>
+                 <?php include("registracija.php"); ?>
             </div>
 
             <!-- Blog Sidebar Widgets Column -->

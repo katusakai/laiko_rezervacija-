@@ -1,4 +1,4 @@
-<?php ob_start(); ?>
+<?php //ob_start(); ?>
 <?php require_once("init.php"); ?>
 <?php // !$session->is_signed_in() ? redirect("login.php") : false  //if not signed in- redirects  ?>
 
@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Rezervacijų sąrašas</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

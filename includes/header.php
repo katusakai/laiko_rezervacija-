@@ -1,5 +1,5 @@
-<?php ob_start(); ?>
-<?php require_once("admin/includes/init.php"); ?>
+<?php// ob_start(); ?>
+<?php include("admin/includes/init.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>Laiko rezervacija</title>
 
     <!-- Bootstrap Core CSS -->
  
