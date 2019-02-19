@@ -104,6 +104,7 @@ if(isset($_POST['submit_rezervuoti'])){
 
     $rezervacija->rezervacijos_diena = $diena;
     $rezervacija->iraso_data = date('Y-m-d H:i:s');
+    $rezervacija->apsilankymas = Rezervacija::kiekKartuLankesi($rezervacija->vardas, $rezervacija->pavarde) + 1;
     if($zinute == ""){
         if($rezervacija->create() && $cookie->uzrezervuota($rezervacija->id,$rezervacija->vardas, $rezervacija->pavarde, $rezervacija->email, $rezervacija->phone, $rezervacija->rezervacijos_diena, $rezervacija->rezervacijos_laikas)){
             redirect("index.php");

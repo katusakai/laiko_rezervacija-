@@ -92,7 +92,7 @@ function addOrUpdateUrlParam(){                                //returns current
 
 
   #############   Variables required for sorting################
-$columns = array('rezervacijos_diena','pavarde','email','phone','vardas','rezervacijos_laikas');
+$columns = array('rezervacijos_diena','pavarde','email','phone','vardas','rezervacijos_laikas','apsilankymas');
 $column = isset($_GET['column']) && in_array($_GET['column'], $columns) ? $_GET['column'] : $columns[0];
 $sort_order = isset($_GET['order']) && strtolower($_GET['order']) == 'asc' ? 'ASC' : 'DESC';
 $up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sort_order); 

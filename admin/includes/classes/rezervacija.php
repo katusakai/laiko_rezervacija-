@@ -1,7 +1,7 @@
 <?php
 class Rezervacija extends Db_object{
     protected static $db_table = "rezervacijos";
-    protected static $db_table_fields = array('vardas', 'pavarde', 'email', 'phone', 'rezervacijos_diena', 'rezervacijos_laikas', 'iraso_data');
+    protected static $db_table_fields = array('vardas', 'pavarde', 'email', 'phone', 'rezervacijos_diena', 'rezervacijos_laikas', 'iraso_data','apsilankymas');
     public $id;
     public $vardas;
     public $pavarde;
@@ -10,6 +10,7 @@ class Rezervacija extends Db_object{
     public $rezervacijos_diena;
     public $rezervacijos_laikas;
     public $iraso_data; 
+    public $apsilankymas;
 
     private static $darbo_pradzia_val = 9;   //valandos
     private static $darbo_pradzia_min = 0;		//minute
@@ -92,6 +93,19 @@ class Rezervacija extends Db_object{
                 rezervacijos_LAIKAS ASC
                 LIMIT {$page_number}, {$limit}";
         return static::find_by_query($sql);
+    }
+
+    public static function arDuotiNuolaidą($apsilankymas){
+        if($apsilankymas % 5 == 0){            //galima mainstreamint kad keisti skaičių
+            return ". Skirti nuolaida";
+        }
+    }
+
+    public static function kiekKartuLankesi($vardas, $pavarde){
+        $sql = "SELECT * FROM " . static::$db_table . " 
+                WHERE vardas = '$vardas' 
+                AND pavarde = '$pavarde'";
+        return count(static::find_by_query($sql));
     }
 }
 ?>

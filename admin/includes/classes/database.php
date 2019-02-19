@@ -25,15 +25,13 @@ class Database {
 
   private function confirm_query($result){
     if(!$result) {
-      // die("Query failed" . mysqli_error($this->connection));
       die("Query failed" . $this->connection->error); //using error property of mysqli class
     }
   }
 
   public function escape_string($string){
-    // $escape_string = mysqli_real_escape_string($this->connection, $string);
     $escape_string = $this->connection->real_escape_string($string); //using real_escape_string method of mysqli class. Avoids sql injection
-  //  $escape_string = htmlspecialchars($escape_string, ENT_QUOTES); //Avoids javascript and html  injection
+    $escape_string = htmlspecialchars($escape_string, ENT_QUOTES); //Avoids javascript and html  injection
     return $escape_string;    
   }
 

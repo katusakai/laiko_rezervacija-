@@ -95,7 +95,6 @@ class Db_object{
     $database->query($sql);
     return ($database->connection->affected_rows == 1) ? true : false;
   }
-
 }
 
  ?>

@@ -39,6 +39,7 @@
                     <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=phone&order=<?php echo $asc_or_desc; ?>">Tel. nr.</a></th>
                     <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_diena&order=<?php echo $asc_or_desc; ?>">Diena</a></th>
                     <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_laikas&order=<?php echo $asc_or_desc; ?>">Laikas</a></th>
+                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=apsilankymas&order=<?php echo $asc_or_desc; ?>">Apsilankymo Nr.</a></th>
                     <?php if($session->ifAdmin()){ ?>
                     <th>Ištrinti</th>
                     <?php }?>
@@ -48,7 +49,7 @@
         
             <?php 
             $limit = 20; //reik mainstreamint
-            if(isset($_GET['search_submit']) && isset($_GET['data'])){
+            if(isset($_GET['search_submit']) && $_GET['data'] != ""){
                 $search = $_GET['data'];
             }elseif(isset($_GET['search_submit'])){
                 $search = $_GET['search'];
@@ -61,7 +62,7 @@
             $query_count = queryCount($rezervacijos, $limit);
             $rezervacijos = Rezervacija::findBySearchLimited($search, $page_number, $limit, $column, $sort_order);
              
-            foreach ($rezervacijos as $irasas) {
+            foreach ($rezervacijos as $irasas) {                
                 echo "<tr>";
                 echo "<td>{$irasas->vardas}</td>";
                 echo "<td>{$irasas->pavarde}</td>";
@@ -69,6 +70,7 @@
                 echo "<td>{$irasas->phone}</td>";
                 echo "<td style='min-width:90px'>{$irasas->rezervacijos_diena}</td>";
                 echo "<td>{$irasas->rezervacijos_laikas}</td>";
+                echo "<td>{$irasas->apsilankymas} " . Rezervacija::arDuotiNuolaidą($irasas->apsilankymas) . "</td>";
                 if($session->ifAdmin()){
                     echo "<td><a onClick=\"javascript: return confirm('Ar tikrai norite ištrinti?'); \" class='text-danger' href='includes/delete_rezervacija.php?id=" . $irasas->id ."'>Ištrinti<a></td>";
                 }
