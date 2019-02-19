@@ -63,13 +63,6 @@ function pageNr($array, $limit){                      //for pagination
 return $page_1;  
 }
 
-// function ifSearch(){                          //for pagination
-//   global $search;
-//   if(isset($_GET['search_submit'])){
-//     echo "search=$search&search_submit=&";
-//   }
-// }
-
 
 function ifActive(){                        //for pagination
   global $i;
@@ -92,7 +85,7 @@ function addOrUpdateUrlParam(){                                //returns current
 
 
   #############   Variables required for sorting################
-$columns = array('rezervacijos_diena','pavarde','email','phone','vardas','rezervacijos_laikas','apsilankymas');
+$columns = array('rezervacijos_diena','pavarde','email','phone','vardas','rezervacijos_laikas','apsilankymas','kurejo_id');
 $column = isset($_GET['column']) && in_array($_GET['column'], $columns) ? $_GET['column'] : $columns[0];
 $sort_order = isset($_GET['order']) && strtolower($_GET['order']) == 'asc' ? 'ASC' : 'DESC';
 $up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sort_order); 

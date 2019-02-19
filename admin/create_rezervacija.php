@@ -77,6 +77,7 @@ function diena(){
                     $rezervacija->rezervacijos_diena = $diena;
                     $rezervacija->iraso_data = date('Y-m-d H:i:s');
                     $rezervacija->apsilankymas = Rezervacija::kiekKartuLankesi($rezervacija->vardas, $rezervacija->pavarde) + 1;
+                    $rezervacija->kurejo_id = $_SESSION['id'];
                     if($zinute == ""){
                         if($rezervacija->create()){
                             echo "<div class='alert alert-success'>Rezervacija sėkmingai atlikta</div>";

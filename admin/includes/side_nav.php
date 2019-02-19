@@ -1,8 +1,8 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
-        <!-- <li>
-            <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Pagrindinis</a>
-        </li> -->
+        <li>
+            <a href="index.php?siandien=&data=<?php echo date('Y-m-d') ?>&search_submit="><i class="fa fa-fw fa-dashboard"></i> Šiandienos rezervacijos</a>
+        </li>
 		 <li>
             <a href="index.php?url=rezervacija"><i class="fa fa-fw fa-list"></i> Rezervacijų sąrašas</a>
         </li>

@@ -1,7 +1,7 @@
 <?php
 class Rezervacija extends Db_object{
     protected static $db_table = "rezervacijos";
-    protected static $db_table_fields = array('vardas', 'pavarde', 'email', 'phone', 'rezervacijos_diena', 'rezervacijos_laikas', 'iraso_data','apsilankymas');
+    protected static $db_table_fields = array('vardas', 'pavarde', 'email', 'phone', 'rezervacijos_diena', 'rezervacijos_laikas', 'iraso_data','apsilankymas','kurejo_id');
     public $id;
     public $vardas;
     public $pavarde;
@@ -11,6 +11,7 @@ class Rezervacija extends Db_object{
     public $rezervacijos_laikas;
     public $iraso_data; 
     public $apsilankymas;
+    public $kurejo_id;
 
     private static $darbo_pradzia_val = 9;   //valandos
     private static $darbo_pradzia_min = 0;		//minute
@@ -107,5 +108,6 @@ class Rezervacija extends Db_object{
                 AND pavarde = '$pavarde'";
         return count(static::find_by_query($sql));
     }
+
 }
 ?>

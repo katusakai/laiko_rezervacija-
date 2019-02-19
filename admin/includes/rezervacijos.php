@@ -5,9 +5,9 @@
 <div class="row">
     <div class="col-lg-12">
         <h2 class="page-header">
-            Visos rezervacijos
-        </h2>
-
+            Rezervacijos
+        </h2>     
+    <?php if(!isset($_GET['siandien'])){ ?>
         <div class="well">
             <form action="" method="GET">
                 <div class="input-group"> 
@@ -16,7 +16,7 @@
                 <div class="input-group">                    
                     <input name="search" type="text" class="form-control" <?php postValue('search')?>>
                     <span class="input-group-btn">
-                        <input class="form-control" type="date" name="data"<?php postValue('data')?>>
+                        <input class="form-control" type="date" name="data" <?php postValue('data')?>>
                     </span>
                     <span class="input-group-btn">
                         <button name="search_submit" class="btn btn-default" type="submit">
@@ -26,7 +26,8 @@
                 </div>
             </form>        
         </div>
-    
+    <?php }?>
+
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -40,6 +41,8 @@
                     <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_diena&order=<?php echo $asc_or_desc; ?>">Diena</a></th>
                     <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=rezervacijos_laikas&order=<?php echo $asc_or_desc; ?>">Laikas</a></th>
                     <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=apsilankymas&order=<?php echo $asc_or_desc; ?>">Apsilankymo Nr.</a></th>
+                    <th><a href="<?php echo addOrUpdateUrlParam() ?>&column=apsilankymas&order=<?php echo $asc_or_desc; ?>">Rezervavęs asmuo</a></th>
+                    
                     <?php if($session->ifAdmin()){ ?>
                     <th>Ištrinti</th>
                     <?php }?>
@@ -62,7 +65,8 @@
             $query_count = queryCount($rezervacijos, $limit);
             $rezervacijos = Rezervacija::findBySearchLimited($search, $page_number, $limit, $column, $sort_order);
              
-            foreach ($rezervacijos as $irasas) {                
+            foreach ($rezervacijos as $irasas) { 
+                $rezervavo = User::kasRezervavo($irasas->kurejo_id);               
                 echo "<tr>";
                 echo "<td>{$irasas->vardas}</td>";
                 echo "<td>{$irasas->pavarde}</td>";
@@ -71,6 +75,7 @@
                 echo "<td style='min-width:90px'>{$irasas->rezervacijos_diena}</td>";
                 echo "<td>{$irasas->rezervacijos_laikas}</td>";
                 echo "<td>{$irasas->apsilankymas} " . Rezervacija::arDuotiNuolaidą($irasas->apsilankymas) . "</td>";
+                echo "<td>$rezervavo</td>";
                 if($session->ifAdmin()){
                     echo "<td><a onClick=\"javascript: return confirm('Ar tikrai norite ištrinti?'); \" class='text-danger' href='includes/delete_rezervacija.php?id=" . $irasas->id ."'>Ištrinti<a></td>";
                 }

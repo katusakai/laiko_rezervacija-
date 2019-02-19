@@ -34,6 +34,18 @@ class User extends Db_object{
     if($this->pareigos == $option ){
     echo "selected";
     }
-}
+  }
+
+  public static function kasRezervavo($id){
+    if($id == 0 || $id == ""){
+      return "Klientas";
+    } else{
+      $sql = "SELECT * FROM " . static::$db_table . " 
+              WHERE id = $id 
+              LIMIT 1";
+      $rezervuotojas = static::find_by_query($sql);        
+      return $rezervuotojas[0]->firstName . " " . $rezervuotojas[0]->lastName;
+    }
+  }
 }
 ?>
